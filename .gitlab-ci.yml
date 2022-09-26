@@ -1,0 +1,22 @@
+image: ubuntu:latest
+
+stages:
+- Build
+- 
+
+services:
+  - docker:dind 
+
+
+build:
+    image: docker:latest
+    stage: Build
+    
+    variables:
+        IMAGE: ${DOCKER_USER}/myciapp
+
+    script:
+        - "docker build . -t ${DOCKER_USER}/myciapp:latest"
+        - "docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}"
+        - "docker push ${DOCKER_USER}/myciapp:latest"
+
