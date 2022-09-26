@@ -33,6 +33,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USER }}/puc-ci-app:latest
 
   Sast:
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
