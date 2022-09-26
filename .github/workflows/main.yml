@@ -9,54 +9,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Install
-        run: npm install
+  #     - name: Install
+  #       run: npm install
       
-      - name: Docker Login
-        uses: docker/login-action@v1.12.0
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Docker Login
+  #       uses: docker/login-action@v1.12.0
+  #       with:
+  #         username: ${{ secrets.DOCKER_USER }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Docker Build And Push
-        uses: docker/build-push-action@v2.7.0
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USER }}/puc-ci-app:latest
+  #     - name: Docker Build And Push
+  #       uses: docker/build-push-action@v2.7.0
+  #       with:
+  #         context: .
+  #         file: ./Dockerfile
+  #         push: true
+  #         tags: ${{ secrets.DOCKER_USER }}/puc-ci-app:latest
 
-  sast:
-    needs: [build]
-    runs-on: ubuntu-latest
+  # sast:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Self sast-scan
-        uses: AppThreat/sast-scan-action@v1.0.0
-        with:
-          output: reports
-          type: nodejs,bash
-      - name: Upload scan reports
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: sast-scan-reports
-          path: reports
+  #   steps:
+  #     - name: Self sast-scan
+  #       uses: AppThreat/sast-scan-action@v1.0.0
+  #       with:
+  #         output: reports
+  #         type: nodejs,bash
+  #     - name: Upload scan reports
+  #       uses: actions/upload-artifact@v1.0.0
+  #       with:
+  #         name: sast-scan-reports
+  #         path: reports
 
   deploy:
-    needs: [sast]
+    # needs: [sast]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
       - name: deploy to heroku
-        id: deploy      
+        id: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
