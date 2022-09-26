@@ -5,10 +5,6 @@ BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
 
 PARSE_MODE="Markdown"
 
-
-echo steps.deploy.outcome
-
-
 # Define send message function. parse_mode can be changed to
 # HTML, depending on how you want to format your message:
 

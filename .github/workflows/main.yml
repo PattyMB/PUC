@@ -56,7 +56,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: deploy to heroku
-        id: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
