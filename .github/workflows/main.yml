@@ -32,6 +32,21 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/puc-ci-app:latest
 
+  Sast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Self sast-scan
+        uses: AppThreat/sast-scan-action@v1.0.0
+        with:
+          output: reports
+          type: nodejs,bash
+      - name: Upload scan reports
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: sast-scan-reports
+          path: reports
+
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
