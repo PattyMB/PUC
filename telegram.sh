@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Get the token from Travis environment vars and build the bot URL:
-BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
+BOT_URL="https://api.telegram.org/bot9988481/sendMessage"
 
 PARSE_MODE="Markdown"
 
