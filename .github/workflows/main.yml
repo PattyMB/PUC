@@ -64,7 +64,7 @@ jobs:
 
       - name: send telegram message on finish
         run: |
-        chmod +x telegram.sh 
-        ./telegram.sh
+          chmod +x telegram.sh 
+          ./telegram.sh
 
     
